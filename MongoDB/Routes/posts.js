@@ -22,6 +22,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// ADD A NEW POST
 router.post('/', async (req, res) => {
     const post = new Post({
         title: req.body.title,
@@ -33,6 +34,16 @@ router.post('/', async (req, res) => {
         res.json(savedPost);
     } catch (err) {
         res.json({message: err});
+    }
+});
+
+// DELETE A POST
+router.delete('/:id', async (req, res) => {
+    try {
+        const removedPost = await Post.remove({ _id: req.params.id });
+        res.json(removedPost);
+    } catch (err) {
+        res.json({ message: err });
     }
 });
 
