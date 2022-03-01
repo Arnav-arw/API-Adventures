@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 
+// GETS A SPECIFIC POST
+router.get('/:id', async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        res.json(post);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
+// GETS ALL POSTS
 router.get('/', async (req, res) => {
     try {
         const posts = await Post.find();
